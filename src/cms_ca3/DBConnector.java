@@ -6,7 +6,7 @@ package cms_ca3;
 
 /**
  *
- * @author pavol
+ * @author  pavol
  */
 public class DBConnector {
     protected final String DB_URL = "jdbc:mysql://localhost";
