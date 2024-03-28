@@ -5,6 +5,7 @@
 package cms_ca3;
 
 import DataOutputClases.CSVFileOutput;
+import DataOutputClases.ConsoleOutput;
 import DataOutputClases.TextFileOutput;
 import ReportsGenerator.CourseReport;
 import ReportsGenerator.LecturerReport;
@@ -21,7 +22,7 @@ public class CMS_CA3 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 //        // testing course report generator
 //        try {
 //            CourseReport courseReport = new CourseReport();
@@ -75,14 +76,16 @@ public class CMS_CA3 {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        try {
-            LecturerReport lecturerReport = new LecturerReport();
-            ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
-            TextFileOutput write = new TextFileOutput();
-            write.outputToTextFile(lecturerReportData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+//        try {
+//            LecturerReport lecturerReport = new LecturerReport();
+//            ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
+//            TextFileOutput write = new TextFileOutput();
+//            write.outputToTextFile(lecturerReportData);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+        LecturerReport lecturerReport = new LecturerReport();
+        ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
+        ConsoleOutput.LecturerReport(lecturerReportData);
     }
 }
