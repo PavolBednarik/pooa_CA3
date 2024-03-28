@@ -88,9 +88,12 @@ public class CMS_CA3 {
 //        ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
 //        ConsoleOutput.LecturerReport(lecturerReportData);
 
-        StudentReport studentReport = new StudentReport();
-        ArrayList<String> studentReportData = studentReport.getPassingStudentReport();
-        ConsoleOutput.StudentReport(studentReportData);
+//        StudentReport studentReport = new StudentReport();
+//        ArrayList<String> studentReportData = studentReport.getPassingStudentReport();
+//        ConsoleOutput.StudentReport(studentReportData);
 
+        CourseReport courseReport = new CourseReport();
+        ArrayList<String> courseReportData = courseReport.getCourseReport();
+        ConsoleOutput.CourseReport(courseReportData);
     }
 }
