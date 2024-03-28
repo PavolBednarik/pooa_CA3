@@ -59,7 +59,7 @@ public class LecturerReport extends DBConnector {
         }
         return allData;
     }
-    // same method for Lecturer report with output for csv file 
+    // same method for Lecturer report with output for csv file  
     public ArrayList<String> getLecturerReportcsv() throws SQLException {
         ArrayList<String> allData = new ArrayList<>();
         String query = "SELECT "
