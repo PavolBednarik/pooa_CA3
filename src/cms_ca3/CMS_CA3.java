@@ -5,6 +5,7 @@
 package cms_ca3;
 
 import ReportsGenerator.CourseReport;
+import ReportsGenerator.LecturerReport;
 import ReportsGenerator.StudentReport;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,28 +32,38 @@ public class CMS_CA3 {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
+//        try {
+//            StudentReport studentReport = new StudentReport();
+//            ArrayList<String> studentReportData = studentReport.getPassingStudentReport();
+//            System.out.println("Student report with passing student");
+//            System.out.println("Student ID, Student name, Program name, module name, Grade");
+//            for (String studentName : studentReportData) {
+//                System.out.println(studentName);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            StudentReport studentReport = new StudentReport();
+//            ArrayList<String> studentReportData = studentReport.getFailingStudentReport();
+//            System.out.println("Student report with failing student");
+//            System.out.println("Student ID, Student name, Program name, module name, Grade");
+//            for (String studentName : studentReportData) {
+//                System.out.println(studentName);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         try {
-            StudentReport studentReport = new StudentReport();
-            ArrayList<String> studentReportData = studentReport.getPassingStudentReport();
-            System.out.println("Student report with passing student");
-            System.out.println("Student ID, Student name, Program name, module name, Grade");
-            for (String studentName : studentReportData) {
-                System.out.println(studentName);
+            LecturerReport lecturerReport = new LecturerReport();
+            ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
+            System.out.println("Lecturer report");
+            System.out.println("Lecturer name, Role, Module name, Number of students, Qualification");
+            for (String report : lecturerReportData) {
+                System.out.println(report);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-            StudentReport studentReport = new StudentReport();
-            ArrayList<String> studentReportData = studentReport.getFailingStudentReport();
-            System.out.println("Student report with failing student");
-            System.out.println("Student ID, Student name, Program name, module name, Grade");
-            for (String studentName : studentReportData) {
-                System.out.println(studentName);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
     }
 }
