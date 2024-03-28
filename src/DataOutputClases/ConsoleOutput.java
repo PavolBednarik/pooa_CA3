@@ -5,6 +5,7 @@
 package DataOutputClases;
 
 import ReportsGenerator.LecturerReport;
+import ReportsGenerator.StudentReport;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
  * @author pavol
  */
 public class ConsoleOutput {
+
     // method to get all information about lecturer report as consol output
     public static void LecturerReport(ArrayList<String> data) throws SQLException {
         //new arraylist with lecturer report information
@@ -22,6 +24,22 @@ public class ConsoleOutput {
         System.out.println("Lecturer name, Role, Module name, Number of students, Qualification");
         // Print the lecturer report data sugested by netbean console
         lecturerReportData.forEach(System.out::println);
-
     }
+    // method to get all information about students reports as consol output
+    public static void StudentReport(ArrayList<String> data) throws SQLException {
+        //new arraylists with students report information
+        StudentReport studentReport = new StudentReport();
+        ArrayList<String> studentReportData = studentReport.getPassingStudentReport();
+        ArrayList<String> studentReportDataF = studentReport.getFailingStudentReport();
+        System.out.println("Student report with passing students");
+        System.out.println("Student ID, Student name, Program name, module name, Grade");
+        // print all students with passing grade 
+        studentReportData.forEach(System.out::println);
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Student report with failing students");
+        System.out.println("Student ID, Student name, Program name, module name, Grade");
+        // print all student with failing grade
+        studentReportDataF.forEach(System.out::println);
+    }
+
 }

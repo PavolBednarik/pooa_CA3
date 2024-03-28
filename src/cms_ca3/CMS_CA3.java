@@ -84,8 +84,13 @@ public class CMS_CA3 {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        LecturerReport lecturerReport = new LecturerReport();
-        ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
-        ConsoleOutput.LecturerReport(lecturerReportData);
+//        LecturerReport lecturerReport = new LecturerReport();
+//        ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
+//        ConsoleOutput.LecturerReport(lecturerReportData);
+
+        StudentReport studentReport = new StudentReport();
+        ArrayList<String> studentReportData = studentReport.getPassingStudentReport();
+        ConsoleOutput.StudentReport(studentReportData);
+
     }
 }
