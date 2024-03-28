@@ -8,6 +8,7 @@ package ReportsGenerator;
  *
  * @author  pavol
  */
+// connector to mySQL
 public class DBConnector {
     protected final String DB_URL = "jdbc:mysql://localhost";
     protected final String USER = "pooa2024";
