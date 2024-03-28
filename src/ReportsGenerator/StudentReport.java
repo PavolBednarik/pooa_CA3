@@ -95,4 +95,76 @@ public class StudentReport extends DBConnector {
         }
         return allData;
     }
+    // same method as above just with output to csv file seperated by coma
+    public ArrayList<String> getPassingStudentReportcsv() throws SQLException {
+        ArrayList<String> allData = new ArrayList<>();
+        String query = "SELECT "
+                + "s.student_id, "
+                + "s.student_name, "
+                + "c.program_name, "
+                + "c.module_name, "
+                + "g.grade "
+                + "FROM "
+                + "student s "
+                + "JOIN "
+                + "enrolments e ON s.student_id = e.student_id "
+                + "JOIN "
+                + "grades g ON s.student_id = g.student_id "
+                + "JOIN "
+                + "course c ON e.course_id = c.course_id "
+                + "WHERE "
+                + "g.grade > 39";
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String studentName = rs.getString("student_name");
+                String studentId = rs.getString("student_id");
+                String programme = rs.getString("program_name");
+                String module = rs.getString("module_name");
+                String completedModules = rs.getString("grade");
+                allData.add(studentId + "," + studentName + "," + programme + "," + module + "," + completedModules);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allData;
+    }
+    // same method as above just with output to csv file seperated by coma
+    public ArrayList<String> getFailingStudentReportcsv() throws SQLException {
+        ArrayList<String> allData = new ArrayList<>();
+        String query = "SELECT "
+                + "s.student_id, "
+                + "s.student_name, "
+                + "c.program_name, "
+                + "c.module_name, "
+                + "g.grade "
+                + "FROM "
+                + "student s "
+                + "JOIN "
+                + "enrolments e ON s.student_id = e.student_id "
+                + "JOIN "
+                + "grades g ON s.student_id = g.student_id "
+                + "JOIN "
+                + "course c ON e.course_id = c.course_id "
+                + "WHERE "
+                + "g.grade < 40";
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String studentName = rs.getString("student_name");
+                String studentId = rs.getString("student_id");
+                String programme = rs.getString("program_name");
+                String module = rs.getString("module_name");
+                String completedModules = rs.getString("grade");
+                allData.add(studentId + "," + studentName + "," + programme + "," + module + "," + completedModules);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allData;
+    }
 }
