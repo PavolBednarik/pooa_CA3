@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -122,5 +123,27 @@ public class DatabaseUserTable extends DBConnector {
             e.printStackTrace();
             System.out.println("Failed to update user information in the database.");
         }
+    }
+
+    // method to check all users
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> allUsers = new ArrayList<>();
+        String query = "SELECT * FROM users";
+
+        try ( Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);  PreparedStatement pstmt = conn.prepareStatement(query);  ResultSet rs = pstmt.executeQuery()) {
+            // loop to add them in array list
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+                Userrole userRole = Userrole.valueOf(role);
+                User user = new User(username, password, userRole);
+                allUsers.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return allUsers;
     }
 }

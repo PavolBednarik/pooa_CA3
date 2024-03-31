@@ -5,6 +5,7 @@
 package Users;
 
 import static Users.User.Userrole.ADMIN;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -116,6 +117,22 @@ public class Admin extends User {
             System.out.println("Password changed successfully.");
         } else {
             System.out.println("Incorrect current password.");
+        }
+    }
+
+    // method to show all user 
+    public void displayAllUsers() {
+        // store it in array list
+        ArrayList<User> allUsers = database.getAllUsers();
+        // checking if its empty
+        if (allUsers.isEmpty()) {
+            System.out.println("No users found.");
+        } else {
+            System.out.println("List of all users:");
+            // checking for all users
+            for (User user : allUsers) {
+                System.out.println(user.getUsername() + " - " + user.getRole());
+            }
         }
     }
 }
