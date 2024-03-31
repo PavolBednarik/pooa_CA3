@@ -9,6 +9,7 @@ import Users.User.Userrole;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -20,7 +21,7 @@ public class DatabaseUserTable extends DBConnector {
 
     // i didnt implement in my database user table so we need to create table with users
     public void createTable(String Users) {
-        String sql = "CREATE TABLE users ("
+        String query = "CREATE TABLE users ("
                 + "username VARCHAR(50) UNIQUE,"
                 + "password VARCHAR(50),"
                 + "role ENUM('ADMIN', 'OFFICE', 'LECTURER')"
@@ -28,7 +29,7 @@ public class DatabaseUserTable extends DBConnector {
         try {
             Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);
             Statement stmt = conn.createStatement();
-            stmt.execute(sql);
+            stmt.execute(query);
             System.out.println("Table sucessfully created");
             conn.close();
         } catch (Exception e) {
@@ -83,6 +84,43 @@ public class DatabaseUserTable extends DBConnector {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    // method to retrive pasword from database 
+    public String getPasswordByUsername(String username) {
+        String query = "SELECT password FROM users WHERE username = ?";
+        // inicialaying pasword
+        String password = null;
+        // conection to database
+        try ( Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);  PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            // checking for column password
+            if (rs.next()) {
+                password = rs.getString("password");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return password;
+    }
+
+    // method to update user in database for changin username
+    public void updateUserInDatabase(String oldUsername, String newUsername, String newPassword) {
+        String query = "UPDATE users SET username = ?, password = ? WHERE username = ?";
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, newUsername);
+            pstmt.setString(2, newPassword);
+            pstmt.setString(3, oldUsername);
+            pstmt.executeUpdate();
+            conn.close();
+            System.out.println("User information updated successfully in the database.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to update user information in the database.");
         }
     }
 }
