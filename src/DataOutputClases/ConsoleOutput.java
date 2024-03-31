@@ -46,7 +46,7 @@ public class ConsoleOutput {
 
     // method to get all information about course report as consol output
     public static void CourseReport(ArrayList<String> data) throws SQLException {
-        //new arraylist with course report information
+        //new arraylist with cours report information
         CourseReport courseReport = new CourseReport();
         ArrayList<String> courseReportData = courseReport.getCourseReport();
         System.out.println("Course report");
