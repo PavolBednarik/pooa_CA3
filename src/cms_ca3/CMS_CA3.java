@@ -22,6 +22,7 @@ public class CMS_CA3 {
     /**
      * @param args the command line arguments
      */
+   // https://github.com/PavolBednarik/pooa_CA3.git
     public static void main(String[] args) throws SQLException {
 //        // testing course report generator
 //        try {
