@@ -33,7 +33,7 @@ public class DatabaseUserTable extends DBConnector {
             stmt.execute(query);
             System.out.println("Table sucessfully created");
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -69,7 +69,7 @@ public class DatabaseUserTable extends DBConnector {
             pstmt.executeUpdate();
             conn.close();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -83,7 +83,7 @@ public class DatabaseUserTable extends DBConnector {
             pstmt.setString(1, username);
             pstmt.executeUpdate();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -145,5 +145,38 @@ public class DatabaseUserTable extends DBConnector {
         }
 
         return allUsers;
+    }
+
+    public User getUserByUsername(String username) {
+        User user = null;
+        String query = "SELECT * FROM users WHERE username = ?";
+        try ( Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);  PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, username);
+            try ( ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String fetchedUsername = rs.getString("username");
+                    String fetchedPassword = rs.getString("password");
+                    String fetchedRoleStr = rs.getString("role");
+                    Userrole fetchedRole = Userrole.valueOf(fetchedRoleStr);
+                    switch (fetchedRole) {
+                        case ADMIN:
+                            user = new Admin(fetchedUsername, fetchedPassword, fetchedRole);
+                            break;
+                        case OFFICE:
+                            user = new Office(fetchedUsername, fetchedPassword, fetchedRole);
+                            break;
+                        case LECTURER:
+                            user = new Lecturer(fetchedUsername, fetchedPassword, fetchedRole);
+                            break;
+                        default:
+                            System.out.println("Unknown user role: " + fetchedRoleStr);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Failed to retrieve user information from the database.");
+        }
+        return user;
     }
 }

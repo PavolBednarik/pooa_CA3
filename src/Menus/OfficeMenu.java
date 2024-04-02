@@ -44,7 +44,6 @@ public class OfficeMenu {
                 case 2:
                     StudentReportOutput report1 = new StudentReportOutput();
                     report1.studentOutputMenu();
-                    // studentReportOutput();
                     break;
                 case 3:
                     LecturerReportOutput report2 = new LecturerReportOutput();

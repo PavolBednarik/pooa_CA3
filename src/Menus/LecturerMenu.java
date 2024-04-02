@@ -23,7 +23,7 @@ public class LecturerMenu {
         this.lecturer = lecturer;
     }
 
-    public void lecturerMenu(User user) {
+    public void displayMenu() {
         int choice;
         do {
             System.out.println("Choose option:");

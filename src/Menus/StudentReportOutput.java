@@ -30,7 +30,7 @@ public class StudentReportOutput {
             System.out.println("1. Output to Console");
             System.out.println("2. Output to CSV File");
             System.out.println("3. Output to Text File");
-            System.out.println("4. Back to Main Menu");
+            System.out.println("4. Exit course report menu");
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
             sc.nextLine(); // Consume newline
@@ -46,7 +46,7 @@ public class StudentReportOutput {
                     outputToTextFile();
                     break;
                 case 4:
-                    System.out.println("Returning to Main Menu.");
+                    System.out.println("Exiting menu.");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number from 1 to 4.");
