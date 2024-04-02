@@ -29,9 +29,9 @@ public class CMS_CA3 {
     public static void main(String[] args) throws SQLException {
 
         // I didnt include users table in my database so this code need to be run first to create table and first user  
-        // DatabaseUserTable table = new DatabaseUserTable();
-        // table.createTable("users");
-        // table.addNewUser("admin", "java", ADMIN);
+//         DatabaseUserTable table = new DatabaseUserTable();
+//         table.createTable("users");
+//         table.addNewUser("admin", "java", ADMIN);
         Scanner sc = new Scanner(System.in);
         User currentUser;
         currentUser = authenticateUser(sc);

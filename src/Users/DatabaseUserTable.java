@@ -47,8 +47,12 @@ public class DatabaseUserTable extends DBConnector {
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             pstmt.setString(3, role.toString());// converting enum to string
-            pstmt.executeUpdate();
-            System.out.println("New user added successfully.");
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("New user added successfully.");
+            } else {
+                System.out.println("No user was added to the database.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Failed to add new user to the database.");
@@ -65,9 +69,12 @@ public class DatabaseUserTable extends DBConnector {
             pstmt.setString(2, newPassword);
             pstmt.setString(3, role.toString());// converting enum to string
             pstmt.setString(4, username);
-            //exetute update 
-            pstmt.executeUpdate();
-            conn.close();
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("User information updated successfully.");
+            } else {
+                System.out.println("User not found !!");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,8 +88,12 @@ public class DatabaseUserTable extends DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL + "/CMS", USER, PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, username);
-            pstmt.executeUpdate();
-            conn.close();
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("User deleted successfully.");
+            } else {
+                System.out.println("User not found");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
