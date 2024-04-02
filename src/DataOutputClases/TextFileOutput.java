@@ -13,11 +13,13 @@ import java.util.ArrayList;
  * @author pavol
  */
 public class TextFileOutput {
-    // output to text file
+    private static int reportCounter = 0;
+// output to text file
 
     public void outputToTextFile(ArrayList<String> data) {
         //file name report
-        String filename = "report.txt";
+        reportCounter++;
+        String filename = "report" + reportCounter + ".txt";
         try {
             //using bufferedwriter
             BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
@@ -27,6 +29,7 @@ public class TextFileOutput {
                 bw.newLine();
             }
             bw.close();
+            System.out.println("REPORT SUCCESSFULLY GENERATED " + filename);
         } catch (Exception e) {
             e.printStackTrace();
         }

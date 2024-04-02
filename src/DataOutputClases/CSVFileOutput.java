@@ -13,10 +13,12 @@ import java.util.ArrayList;
  * @author pavol
  */
 public class CSVFileOutput {
+    private static int reportCounter = 0;
     // output to csv file
     public void outputToCSVFile(ArrayList<String> data) {
         //file name report
-        String filename = "report.csv";
+        reportCounter++;
+        String filename = "report" + reportCounter + ".csv";
         try {
             //using bufferedwriter
             BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
@@ -26,6 +28,7 @@ public class CSVFileOutput {
                 bw.newLine();
             }
             bw.close();
+            System.out.println("REPORT SUCCESSFULLY GENERATED " + filename);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -22,7 +22,7 @@ public class AdminMenu {
     }
 
     public void displayMenu() {
-        int choice;
+        String choice;
         do {
             System.out.println("Admin Menu:");
             System.out.println("1. Add new user");
@@ -33,34 +33,33 @@ public class AdminMenu {
             System.out.println("6. Display all users");
             System.out.println("7. Log out");
             System.out.print("Enter your choice: ");
-            choice = sc.nextInt();
-            sc.nextLine(); // Consume newline
+            choice = sc.nextLine().trim();
 
             switch (choice) {
-                case 1:
+                case "1":
                     admin.addNewUser();
                     break;
-                case 2:
+                case "2":
                     admin.modifyUser();
                     break;
-                case 3:
+                case "3":
                     admin.deleteUser();
                     break;
-                case 4:
+                case "4":
                     admin.changeUsername();
                     break;
-                case 5:
+                case "5":
                     admin.changePassword();
                     break;
-                case 6:
+                case "6":
                     admin.displayAllUsers();
                     break;
-                case 7:
-                    System.out.println("Returning to Menu.");
+                case "7":
+                    System.out.println("Returning to log in page");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please enter a number from 1 to 6.");
+                    System.out.println("Invalid choice. Please enter a number from 1 to 7.");
             }
-        } while (choice != 7);
+        } while (!choice.equals("7"));
     }
 }

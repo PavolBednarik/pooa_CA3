@@ -33,24 +33,35 @@ public class CMS_CA3 {
 //         table.createTable("users");
 //         table.addNewUser("admin", "java", ADMIN);
         Scanner sc = new Scanner(System.in);
-        User currentUser;
-        currentUser = authenticateUser(sc);
+        boolean exitProgram = false;
+        
+        while (!exitProgram) {
+        User currentUser = authenticateUser(sc);
 
-        // Once authenticated, display appropriate menu based on user role
         if (currentUser != null) {
             displayMainMenu(currentUser);
+            System.out.println("Logged out successfully.");
+            System.out.println("Do you want to log in as a different user? (yes/no)");
+            String answer = sc.nextLine().trim().toLowerCase();
+            if (answer.equals("no")) {
+                exitProgram = true;
+            }
         } else {
             System.out.println("Login failed. Exiting program.");
+            exitProgram = true; 
         }
-        sc.close();
     }
+
+    System.out.println("Exiting program.");
+    sc.close();
+}
 
     private static User authenticateUser(Scanner sc) {
         // Ask user for username and password
         System.out.println("Enter username: ");
-        String username = sc.nextLine();
+        String username = sc.nextLine().trim();
         System.out.println("Enter password: ");
-        String password = sc.nextLine();
+        String password = sc.nextLine().trim();
 
         // Query the database to retrieve user information
         DatabaseUserTable database = new DatabaseUserTable();

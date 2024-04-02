@@ -24,7 +24,7 @@ public class LecturerReportOutput {
     }
 
     public void lecOutputMenu() {
-        int choice;
+        String choice;
         do {
             System.out.println("Choose output option:");
             System.out.println("1. Output to Console");
@@ -32,33 +32,33 @@ public class LecturerReportOutput {
             System.out.println("3. Output to Text File");
             System.out.println("4. Exit course report menu");
             System.out.print("Enter your choice: ");
-            choice = sc.nextInt();
-            sc.nextLine(); // Consume newline
+            choice = sc.nextLine().trim();
+            
 
             switch (choice) {
-                case 1:
+                case "1":
                     outputToConsole();
                     break;
-                case 2:
+                case "2":
                     outputToCSVFile();
                     break;
-                case 3:
+                case "3":
                     outputToTextFile();
                     break;
-                case 4:
+                case "4":
                     System.out.println("Exiting menu.");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number from 1 to 4.");
             }
-        } while (choice != 4);
+        } while (!choice.equals("4"));
     }
 
     private void outputToConsole() {
         try {
             LecturerReport lecturerReport = new LecturerReport();
             ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
-            ConsoleOutput.CourseReport(lecturerReportData);
+            ConsoleOutput.LecturerReport(lecturerReportData);
         } catch (SQLException e) {
             e.printStackTrace();
         }
