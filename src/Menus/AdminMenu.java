@@ -8,19 +8,27 @@ import Users.Admin;
 import java.util.Scanner;
 
 /**
- *
- * @author pavol
+ * Represents the admin menu This class is responsible for displaying the admin
+ * actions menu and handling user inputs to execute various administrative
+ * functions such as adding, modifying, and deleting users,changing username and
+ * password
  */
 public class AdminMenu {
 
     private Scanner sc;
     private Admin admin;
 
+    // constructor for admin menu with admin object
     public AdminMenu(Admin admin) {
         this.admin = admin;
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Displays the admin menu and processes user choices. This method
+     * repeatedly displays the menu and executes the selected action until the
+     * user decides to log out by choosing option 7.
+     */
     public void displayMenu() {
         String choice;
         do {

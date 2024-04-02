@@ -9,13 +9,15 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
- *
- * @author pavol
+ * Handles the output of data to a text file.
+ * This class provides functionality to write an ArrayList of strings to a text file,
+ * incrementing a counter with each new report to ensure unique filenames.
  */
 public class TextFileOutput {
+    // Static counter to ensure each report has a unique filename
     private static int reportCounter = 0;
-// output to text file
-
+    
+    // output to text file
     public void outputToTextFile(ArrayList<String> data) {
         //file name report
         reportCounter++;

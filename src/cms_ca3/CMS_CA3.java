@@ -26,18 +26,21 @@ public class CMS_CA3 {
      * @param args the command line arguments
      */
     // https://github.com/PavolBednarik/pooa_CA3.git
+    // sorry Sam i still cant get my head around interfaces so at the moment is like that
+    // when you populating MYSQL with my csv files there need to be change date for format year-month-date 
     public static void main(String[] args) throws SQLException {
 
-        // I didnt include users table in my database so this code need to be run first to create table and first user  
+// I didnt include users table in my database so this code need to be run first to create table and first user  
 //         DatabaseUserTable table = new DatabaseUserTable();
 //         table.createTable("users");
 //         table.addNewUser("admin", "java", ADMIN);
         Scanner sc = new Scanner(System.in);
+        // initialazing exit program as false
         boolean exitProgram = false;
-        
+        // loop until exit program is not true
         while (!exitProgram) {
         User currentUser = authenticateUser(sc);
-
+        // checking user and display maneu according to role
         if (currentUser != null) {
             displayMainMenu(currentUser);
             System.out.println("Logged out successfully.");

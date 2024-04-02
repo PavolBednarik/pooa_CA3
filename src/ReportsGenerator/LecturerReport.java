@@ -12,8 +12,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- * @author pavol
+ * Generates and retrieves lecturer reports from the database. This class
+ * provides functionality to fetch lecturer report data in standard format and a
+ * CSV format.
  */
 // extendng DBconnector 
 public class LecturerReport extends DBConnector {
@@ -59,6 +60,7 @@ public class LecturerReport extends DBConnector {
         }
         return allData;
     }
+
     // same method for Lecturer report with output for csv file  
     public ArrayList<String> getLecturerReportcsv() throws SQLException {
         ArrayList<String> allData = new ArrayList<>();

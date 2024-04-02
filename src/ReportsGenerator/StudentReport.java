@@ -12,8 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- * @author pavol
+ * Generates and retrieves students reports from the database. This class provides
+ * functionality to fetch students report data in standard format and a CSV format.
  */
 // extending class DBconnector for connecting to my database
 public class StudentReport extends DBConnector {

@@ -5,12 +5,12 @@
 package Menus;
 
 import Users.Lecturer;
-import Users.User;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
- *
- * @author pavol
+ * Provides a menu specifically for lecturer users, allowing them to generating
+ * report and changing their username or password.
  */
 public class LecturerMenu {
 
@@ -18,12 +18,14 @@ public class LecturerMenu {
 
     Lecturer lecturer;
 
+    //Constructs a LecturerMenu with  Lecturer object.
     public LecturerMenu(Lecturer lecturer) {
         this.sc = new Scanner(System.in);
         this.lecturer = lecturer;
     }
 
-    public void displayMenu() {
+    // display lecturer menu
+    public void displayMenu() throws SQLException {
         String choice;
         do {
             System.out.println("Choose option:");
@@ -33,17 +35,19 @@ public class LecturerMenu {
             System.out.println("4. Log out");
             System.out.print("Enter your choice: ");
             choice = sc.nextLine().trim();
-            
 
             switch (choice) {
                 case "1":
+                    // generate lecturer report 
                     LecturerReportOutput reportOutput = new LecturerReportOutput();
                     reportOutput.lecOutputMenu();
                     break;
                 case "2":
+                    //changing username
                     lecturer.changeUsername();
                     break;
                 case "3":
+                    //changing pasword
                     lecturer.changePassword();
                     break;
                 case "4":
@@ -52,6 +56,7 @@ public class LecturerMenu {
                 default:
                     System.out.println("Invalid choice. Please enter a number from 1 to 4.");
             }
+            // loop until they pres 4
         } while (!choice.equals("4"));
     }
 }

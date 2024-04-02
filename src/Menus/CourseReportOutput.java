@@ -13,19 +13,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author pavol
+ * Handles the display of course reports through various output formats.
+ * Provides a menu to the user for selecting the output format of the course
+ * report, including console display, CSV file, and text file.
  */
 public class CourseReportOutput {
- 
-     private Scanner sc;
+
+    private Scanner sc;
 
     public CourseReportOutput() {
         sc = new Scanner(System.in);
     }
+
     // menu for course output
-    public void courseOutputMenu() {
-        int choice;
+    public void courseOutputMenu() throws SQLException {
+        String choice;
         do {
             System.out.println("Choose output option:");
             System.out.println("1. Output to Console");
@@ -33,54 +35,32 @@ public class CourseReportOutput {
             System.out.println("3. Output to Text File");
             System.out.println("4. Exit course report menu");
             System.out.print("Enter your choice: ");
-            choice = sc.nextInt();
-            sc.nextLine(); // Consume newline
-
+            choice = sc.nextLine().trim();
+            // geting course report data
+            CourseReport courseReport = new CourseReport();
+            ArrayList<String> courseReportData = courseReport.getCourseReport();
+            ArrayList<String> courseReportDatacsv = courseReport.getCourseReportcsv();
             switch (choice) {
-                case 1:
-                    outputToConsole();
+                case "1":
+                    // Output the course report to the console
+                    ConsoleOutput.CourseReport(courseReportData);
                     break;
-                case 2:
-                    outputToCSVFile();
+                case "2":
+                    // Output the course report to a CSV file
+                    CSVFileOutput write = new CSVFileOutput();
+                    write.outputToCSVFile(courseReportDatacsv);
                     break;
-                case 3:
-                    outputToTextFile();
+                case "3":
+                    // Output the course report to a text file
+                    TextFileOutput writetxt = new TextFileOutput();
+                    writetxt.outputToTextFile(courseReportData);
                     break;
-                case 4:
+                case "4":
                     System.out.println("Exiting menu.");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number from 1 to 4.");
             }
-        } while (choice != 4);
-    }
-
-    private void outputToConsole() {
-        try {
-            CourseReport courseReport = new CourseReport();
-            ArrayList<String> courseReportData = courseReport.getCourseReport();
-            ConsoleOutput.CourseReport(courseReportData);
-        } catch (SQLException e) {
-        }
-    }
-
-    private void outputToCSVFile() {
-        try {
-            CourseReport courseReport = new CourseReport();
-            ArrayList<String> courseReportData = courseReport.getCourseReportcsv();
-            CSVFileOutput write = new CSVFileOutput();
-            write.outputToCSVFile(courseReportData);
-        } catch (SQLException e) {
-        }
-    }
-
-    private void outputToTextFile() {
-        try {
-            CourseReport courseReport = new CourseReport();
-            ArrayList<String> courseReportData = courseReport.getCourseReport();
-            TextFileOutput write = new TextFileOutput();
-            write.outputToTextFile(courseReportData);
-        } catch (SQLException e) {
-        }
+        } while (!choice.equals("4"));
     }
 }

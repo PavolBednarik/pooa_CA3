@@ -15,7 +15,5 @@ public class Lecturer extends User {
     // constructor
     public Lecturer(String username, String password, Userrole role) {
         super(username, password, LECTURER);
-
     }
-
 }

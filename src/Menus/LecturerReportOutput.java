@@ -13,17 +13,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author pavol
+ * Menu for selecting the output format of lecturer reports. This class provides
+ * functionality for displaying a menu that allows users to choose how they want
+ * to view or export lecturer reports, including output to console, CSV file, or
+ * text file.
  */
 public class LecturerReportOutput {
+
     private Scanner sc;
 
     public LecturerReportOutput() {
         sc = new Scanner(System.in);
     }
 
-    public void lecOutputMenu() {
+    // display menu for lecturer report
+    public void lecOutputMenu() throws SQLException {
         String choice;
         do {
             System.out.println("Choose output option:");
@@ -33,56 +37,32 @@ public class LecturerReportOutput {
             System.out.println("4. Exit course report menu");
             System.out.print("Enter your choice: ");
             choice = sc.nextLine().trim();
-            
-
+            // Fetch report data in preparation for output
+            LecturerReport lecturerReport = new LecturerReport();
+            ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
+            ArrayList<String> lecturerReportDatacsv = lecturerReport.getLecturerReportcsv();
             switch (choice) {
                 case "1":
-                    outputToConsole();
+                    //output to console
+                    ConsoleOutput.LecturerReport(lecturerReportData);
                     break;
                 case "2":
-                    outputToCSVFile();
+                    //// output to csv file
+                    CSVFileOutput write = new CSVFileOutput();
+                    write.outputToCSVFile(lecturerReportDatacsv);
                     break;
                 case "3":
-                    outputToTextFile();
+                    //output to text file
+                    TextFileOutput writetxt = new TextFileOutput();
+                    writetxt.outputToTextFile(lecturerReportData);
                     break;
                 case "4":
+                    // exit lecturer menu
                     System.out.println("Exiting menu.");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number from 1 to 4.");
             }
         } while (!choice.equals("4"));
-    }
-
-    private void outputToConsole() {
-        try {
-            LecturerReport lecturerReport = new LecturerReport();
-            ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
-            ConsoleOutput.LecturerReport(lecturerReportData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void outputToCSVFile() {
-        try {
-            LecturerReport lecturerReport = new LecturerReport();
-            ArrayList<String> lecturerReportData = lecturerReport.getLecturerReportcsv();
-            CSVFileOutput write = new CSVFileOutput();
-            write.outputToCSVFile(lecturerReportData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void outputToTextFile() {
-        try {
-            LecturerReport lecturerReport = new LecturerReport();
-            ArrayList<String> lecturerReportData = lecturerReport.getLecturerReport();
-            TextFileOutput write = new TextFileOutput();
-            write.outputToTextFile(lecturerReportData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

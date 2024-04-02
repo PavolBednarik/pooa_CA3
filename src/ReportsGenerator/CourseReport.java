@@ -12,12 +12,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- * @author pavol
+ * Generates and retrieves course reports from the database. This class provides
+ * functionality to fetch course report data in standard format and a CSV format.
  */
 public class CourseReport extends DBConnector {
-// creating method to get course report and store it in arraylist
 
+// creating method to get course report and store it in arraylist
     public ArrayList<String> getCourseReport() throws SQLException {
         ArrayList<String> allData = new ArrayList<>();
         //query for selecting data from different tables to get course report

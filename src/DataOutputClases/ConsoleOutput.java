@@ -11,8 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *
- * @author pavol
+ * Provides methods for printing various reports to the console.
+ * This class is designed to take report data and format it for console output, 
+ * 
  */
 public class ConsoleOutput {
 
